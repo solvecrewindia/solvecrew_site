@@ -29,8 +29,8 @@
       </div>
     </section>
 
-    <section class="about" id="about">
-      <div class="about-header">
+    <section class="about">
+      <div class="about-header" id="about">
         <span class="tag">[ABOUT US]</span>
         <h2>Who We Are</h2>
       </div>
@@ -109,36 +109,37 @@
         <h2>Let's Connect</h2>
       </div>
       <div class="contact-right">
-        <form action="https://formsubmit.co/solvecrewindia@email.com" method="POST">
-          <input type="email" name="email" placeholder="Your Email" required />
+        <form action="https://formsubmit.co/solvecrewindia@gmail.com" method="POST" id="contact-form">
+          <input type="email" name="from" placeholder="Your Email" required />
           <br />
           <input type="text" name="subject" placeholder="Subject" required />
           <br />
           <textarea name="message" placeholder="Your Message and give your email atlast" required></textarea>
           <br />
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_template" value="box">
-          <input type="hidden" name="_next" value="https://solvecrew.github.io">
           <button type="submit">Send</button>
         </form>
+        <div id="form-status"></div>
       </div>
     </section>
+  </main>
 
-    <footer class="footer">
-      <p>© 2025 Solvecrew. All rights reserved.</p>
-    </footer>
+  <footer class="footer">
+    <p>© 2025 Solvecrew. All rights reserved.</p>
+  </footer>
 
-    <script>
-      // Smooth scroll for nav links
-      document.querySelectorAll('nav a').forEach(link => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          const id = link.getAttribute('href');
-          document.querySelector(id).scrollIntoView({
-            behavior: 'smooth'
-          });
+  <script>
+    // Smooth scroll for nav links
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = link.getAttribute('href');
+        document.querySelector(id).scrollIntoView({
+          behavior: 'smooth'
         });
       });
-    </script>
+    });
+
+    // Optional: AJAX form submission removed since FormSubmit reloads the page on submit by default
+  </script>
 </body>
 </html>

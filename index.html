@@ -105,43 +105,26 @@
     </section>
 
     <section class="contact" id="contact">
-  <div class="contact-left">
-    <h2>Let's Connect</h2>
-  </div>
-  <div class="contact-right">
-    <form action="https://getform.io/f/apjpndda" method="POST" id="contact-form">
-      <input type="email" name="email" placeholder="Your Email" required />
-      <br />
-      <input type="text" name="subject" placeholder="Subject" required />
-      <br />
-      <textarea name="message" placeholder="Your Message and give your email at last" required></textarea>
-      <br />
-      <button type="submit">Send</button>
-    </form>
-  </div>
-</section>
-
-<!-- Removed AJAX JavaScript, no script needed for form submission -->
-
+      <div class="contact-left">
+        <h2>Let's Connect</h2>
+      </div>
+      <div class="contact-right">
+        <form action="https://getform.io/f/apjpndda" method="POST" id="contact-form">
+          <input type="email" name="email" placeholder="Your Email" required />
+          <br />
+          <input type="text" name="subject" placeholder="Subject" required />
+          <br />
+          <textarea name="message" placeholder="Your Message and give your email at last" required></textarea>
+          <br />
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
     <p>© 2025 Solvecrew. All rights reserved.</p>
   </footer>
 
-  <script>
-    // Smooth scroll for nav links
-    document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const id = link.getAttribute('href');
-        document.querySelector(id).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
-
-    // Optional: AJAX form submission removed since FormSubmit reloads the page on submit by default
-  </script>
 </body>
 </html>

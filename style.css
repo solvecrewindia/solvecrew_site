@@ -23,7 +23,7 @@ header {
 }
 
 .logo span {
-  color: #ffdd00;
+  color: #FFC010;
 }
 
 nav a {
@@ -37,12 +37,13 @@ nav a {
 }
 
 nav a:hover {
-  color: #ffdd00;
-  background-color: rgba(255, 221, 0, 0.1);
+  color: #FFC010;
+  background-color: #f8f9fb(234, 233, 222, 0.1);
 }
 
 .contact-btn {
-  background-color: #ffdd00;
+  background-color: #FFC010;
+  color: #f8f9fb;
   padding: 8px 15px;
   border-radius: 5px;
   transition: all 0.3s ease;
@@ -50,9 +51,9 @@ nav a:hover {
 
 .contact-btn:hover {
   background-color: #000;
-  color: #ffdd00;
+  color: #f8f9fb;
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 221, 0, 0.2);
+  box-shadow: 0 5px 15px rgba(255, 192, 16, 0.2);
 }
 
 /* HERO Section */
@@ -221,7 +222,7 @@ section {
 .contact form {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 15px; /* You can adjust this value as needed */
 }
 
 .contact input,
@@ -238,8 +239,8 @@ section {
 }
 
 .contact button {
-  background-color: #ffdd00;
-  color: #000;
+  background-color: #FFC010;
+  color: #f8f9fb;
   padding: 15px 30px;
   border: none;
   border-radius: 8px;
@@ -249,13 +250,107 @@ section {
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  font-family: 'Outfit', sans-serif; /* Match the rest of the site */
 }
-
 .contact button:hover {
   background-color: #000;
-  color: #ffdd00;
+  color: #f8f9fb;
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 221, 0, 0.2);
+  box-shadow: 0 5px 15px rgba(255, 192, 16, 0.2);
+}
+
+@media (max-width: 768px) {
+  .contact form {
+    gap: 6px; /* Reduce gap between fields */
+    max-width: 260px; /* Make the form narrower */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .contact input,
+  .contact textarea {
+    padding: 8px;
+    font-size: 0.95rem;
+    border-radius: 5px;
+    max-width: 260px; /* Make input/textarea narrower */
+  }
+  .contact textarea {
+    min-height: 60px;
+  }
+  .contact button {
+    padding: 10px 0;
+    font-size: 1rem;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 4px;
+    max-width: 260px; /* Make button narrower */
+  }
+}
+
+@media (max-width: 768px) {
+  .contact form {
+    gap: 10px;
+  }
+  .contact input,
+  .contact textarea {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+  }
+  .contact textarea {
+    min-height: 80px;
+  }
+  .contact button {
+    padding: 12px 0;
+    font-size: 1rem;
+    border-radius: 6px;
+    width: 100%;
+    margin-top: 6px;
+  }
+  .contact form,
+  .contact input,
+  .contact textarea,
+  .contact button {
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: stretch;
+    padding-bottom: 60px;
+    padding-top: 40px;
+  }
+  .contact-left,
+  .contact form {
+    width: 100%;
+    max-width: 100%;
+  }
+  .contact form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  .contact input,
+  .contact textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .contact button {
+    width: 100%;
+    margin-top: 8px;
+  }
+    .contact h2 {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
 }
 
 /* Footer */
@@ -263,7 +358,7 @@ section {
   text-align: center;
   padding: 30px 20px;
   background: #f8f9fb;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #f8f9fb;
   font-weight: 500;
   color: #666;
 }
@@ -275,7 +370,7 @@ section {
 
 /* Project Cards */
 .project-type {
-  color: #ffdd00;
+  color: #FFC010;
   font-weight: 700;
   font-size: 0.9rem;
   margin-bottom: 8px;
@@ -331,7 +426,7 @@ section {
 
 .stat h3 {
   font-size: 2.5rem;
-  color: #ffdd00;
+  color: #FFC010;
   margin-bottom: 8px;
 }
 
@@ -345,6 +440,60 @@ section {
   font-size: 1.1rem;
   line-height: 1.6;
   color: #666;
+}
+
+/* Hamburger menu button styles */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  background: #FFC010; /* Set background to new yellow */
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  cursor: pointer;
+  transition: opacity 0.4s cubic-bezier(.4,0,.2,1);
+  will-change: opacity, transform;
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 2100;
+  padding: 0;
+}
+.menu-toggle span {
+  display: block;
+  height: 4px;
+  width: 26px;
+  background: #222;
+  border-radius: 2px;
+  margin: 4px 0;
+  transition: opacity 0.3s;
+  position: relative;
+}
+
+/* Remove curly braces and all motion/animation for menu icon */
+.menu-toggle .toggle-braces {
+  display: none !important;
+  color: #FFC010;
+}
+.menu-toggle.active span {
+  opacity: 1;
+  transform: none;
+}
+.menu-toggle.active {
+  background: linear-gradient(135deg, #ffffff 60%, #ffffff 100%);
+}
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+    background: #000000 !important; /* Yellow circle */
+  }
+  .menu-toggle span {
+    background: #f8f9fb; /* Black bars */
+  }
 }
 
 /* Responsive */
@@ -369,17 +518,50 @@ section {
 
 @media (max-width: 768px) {
   header {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     padding: 20px;
   }
 
   nav {
-    width: 100%;
-    margin-top: 10px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 240px;
+    background: #f8f9fb;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.08);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 24px 24px 24px;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+    z-index: 2000;
+  }
+  nav.active {
+    transform: translateX(0);
+  }
+  .menu-toggle {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 2100;
+    background: #f8f9fb;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-left: 0;
+  }
+  nav a {
+    display: block;
+    width: 100%;
+    margin: 0 0 12px 0;
+    padding: 16px 0;
+    border-bottom: 1px solid #f8f9fb;
+    background: none;
+    text-align: left;
+    color: #000;
   }
 
   .hero {
@@ -455,3 +637,108 @@ section {
     font-size: 0.85rem;
   }
 }
+
+/* Active state for navigation */
+nav.active {
+  background: #f8f9fb;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+nav.active a {
+  color: #000000;
+}
+
+/* Responsive nav for mobile */
+@media (max-width: 768px) {
+  /* Use this block for correct mobile nav sliding sidebar: */
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 240px;
+    background: #f8f9fb;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.08);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 24px 24px 24px;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+    z-index: 2000;
+  }
+  nav.active {
+    transform: translateX(0);
+  }
+  .menu-toggle {
+    display: flex;
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 2100;
+    background: #f8f9fb;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-left: 0;
+  }
+  nav a {
+    display: block;
+    width: 100%;
+    margin: 0 0 12px 0;
+    padding: 16px 0;
+    border-bottom: 1px solid #f8f9fb;
+    background: none;
+    text-align: left;
+    color: #000;
+  }
+}
+
+@media (max-width: 768px) {
+  nav .contact-btn {
+    color: #f8f9fb !important;
+    background-color: #FFC010;
+  }
+}
+
+/* Underline for all main section headings */
+section h2,
+.about-header h2,
+.features h2,
+.events h2,
+.contact h2 {
+  position: relative;
+  display: block; /* Ensure the heading takes full width */
+  text-align: center; /* Center the text */
+  margin-bottom: 18px;
+}
+
+section h2::after,
+.about-header h2::after,
+.features h2::after,
+.events h2::after,
+.contact h2::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 4px;
+  background: #FFC010;
+  border-radius: 2px;
+  margin: 8px auto 0 auto; /* Center the underline */
+}
+
+.menu-toggle {
+  transition: opacity 0.4s cubic-bezier(.4,0,.2,1);
+  will-change: opacity, transform;
+}
+.menu-toggle.hide-on-scroll {
+  opacity: 0;
+  pointer-events: none;
+}
+
+

@@ -55,16 +55,18 @@ nav a:hover {
   box-shadow: 0 5px 15px rgba(255, 221, 0, 0.2);
 }
 
+/* HERO Section */
 .hero {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 60px 0 20px 40px;
-  max-width: 900px;
+  padding: 5px 5px 0px; /* ↓ Reduced bottom padding */
+  max-width: 1000px;
   margin: 0 auto;
-  padding-top: 60px;
-  padding-bottom: 10px;
-  margin-bottom: 40px;
+  margin-bottom: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 3000px;
 }
 
 .hero-text {
@@ -74,7 +76,7 @@ nav a:hover {
 
 .hero-text h1 {
   font-size: 3rem;
-  margin-bottom: 20px;  /* Restored to original 20px */
+  margin-bottom: 20px;
   font-weight: 800;
 }
 
@@ -96,16 +98,28 @@ nav a:hover {
   object-fit: contain;
 }
 
+/* Consistent vertical spacing for main sections */
+section,
+.hero,
+.about,
+.projects,    /* Add this class to your project section in HTML */
+.contact {    /* Add this class to your connect/contact section in HTML */
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
 /* Common section styles */
 section {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 30px 40px; /* Reduced from 40px to 30px */
+  padding: 30px 40px;
 }
 
 /* Features section */
 .features {
   text-align: center;
+  padding-top: 80px;
+  padding-bottom: 100px;
 }
 
 .features h2 {
@@ -138,6 +152,7 @@ section {
 /* Events section */
 .events {
   text-align: center;
+  padding-bottom: 80px;
 }
 
 .events-tag {
@@ -170,7 +185,7 @@ section {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  filter: brightness(0.9);
+  filter: grayscale(100%) brightness(0.9); /* Makes image black and white */
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
@@ -190,6 +205,7 @@ section {
   grid-template-columns: 1fr 1fr;
   gap: 60px;
   align-items: center;
+  padding-bottom: 100px;
 }
 
 .contact-tag {
@@ -205,7 +221,7 @@ section {
 .contact form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0;
 }
 
 .contact input,
@@ -216,9 +232,14 @@ section {
   font-family: inherit;
 }
 
+.contact textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
 .contact button {
-  background: #ffdd00;
-  color: #000000;
+  background-color: #ffdd00;
+  color: #000;
   padding: 15px 30px;
   border: none;
   border-radius: 8px;
@@ -231,15 +252,17 @@ section {
 }
 
 .contact button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(255, 221, 0, 0.3);
+  background-color: #000;
+  color: #ffdd00;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 221, 0, 0.2);
 }
 
 /* Footer */
 .footer {
   text-align: center;
   padding: 30px 20px;
-  background: #ffffff;
+  background: #f8f9fb;
   border-top: 1px solid #eee;
   font-weight: 500;
   color: #666;
@@ -270,8 +293,8 @@ section {
   background: #f8f9fb;
   border-radius: 20px;
   padding: 60px 40px;
-  margin-top: 40px;
-   /* Reduced from 40px to 20px */
+  margin-top: 20px; /* Already reduced */
+  padding-top: 20px;
 }
 
 .about-header {
@@ -325,18 +348,110 @@ section {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-  .contact {
-    grid-template-columns: 1fr;
-    gap: 40px;
+@media (max-width: 1024px) {
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 40px 20px 10px 20px;
+    max-width: 100%;
   }
-  
-  section {
-    padding: 60px 20px;
+  .hero-text {
+    max-width: 100%;
+    padding-right: 0;
+    margin-bottom: 30px;
+  }
+  .hero-image {
+    padding-right: 0;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
   }
 
+  nav {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 40px 10px 10px 10px;
+    margin-bottom: 10px;
+  }
+
+  .hero-text {
+    max-width: 100%;
+    padding-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .hero-image {
+    padding-right: 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  section {
+    padding: 40px 10px;
+  }
+
+  .feature-cards,
+  .event-cards,
   .about-stats {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+
+  .about {
+    padding: 30px 10px;
+    margin-top: 20px;
+  }
+
+  .about-header h2 {
+    font-size: 2rem;
+  }
+
+  .about-content {
+    padding: 0 5px;
+  }
+
+  .footer {
+    padding: 20px 10px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+
+  .features h2,
+  .events h2,
+  .about-header h2,
+  .contact h2 {
+    font-size: 1.5rem;
+  }
+
+  .stat h3 {
+    font-size: 1.5rem;
+  }
+
+  .footer p {
+    font-size: 0.85rem;
   }
 }

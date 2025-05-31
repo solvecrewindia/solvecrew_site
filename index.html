@@ -6,6 +6,27 @@
   <title>Solvecrew</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .menu-toggle {
+  display: none;
+}
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 2100;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+}
+
+.hide-on-scroll {
+  display: none;
+}
+  </style>
 </head>
 <body>
   <header>
@@ -16,6 +37,12 @@
       <a href="#projects">client projects</a>
       <a href="#contact" class="contact-btn">contact us</a>
     </nav>
+    <button class="menu-toggle" aria-label="Open Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span class="toggle-braces">{}</span>
+    </button>
   </header>
 
   <main>
@@ -29,8 +56,8 @@
       </div>
     </section>
 
-    <section class="about">
-      <div class="about-header" id="about">
+    <section class="about" id="about">
+      <div class="about-header">
         <span class="tag">[ABOUT US]</span>
         <h2>Who We Are</h2>
       </div>
@@ -55,79 +82,142 @@
       </div>
     </section>
 
-    <section class="features" id="features">
-      <h2>Our Features</h2>
-      <div class="feature-cards">
-        <div class="feature-card highlight">
-          <h3>LEARN</h3>
-          <p>Access resources and workshops to upskill your team and stay ahead in web technology.</p>
-        </div>
-        <div class="feature-card">
-          <h3>PROJECTS</h3>
-          <p>Collaborate with us on innovative web projects and digital products.</p>
-        </div>
-        <div class="feature-card">
-          <h3>SUPPORT</h3>
-          <p>Get ongoing support and maintenance for your digital assets.</p>
-        </div>
-      </div>
-    </section>
+  <section class="features" id="features">
+  <h2>Our Features</h2>
+  <div class="feature-cards">
+    <div class="feature-card highlight">
+      <h3>LEARN</h3>
+      <p>Access resources and workshops to upskill your team and stay ahead in web technology.</p>
+    </div>
+    <div class="feature-card">
+      <h3>PROJECTS</h3>
+      <p>Collaborate with us on innovative web projects and digital products.</p>
+    </div>
+    <div class="feature-card">
+      <h3>SUPPORT</h3>
+      <p>Get ongoing support and maintenance for your digital assets.</p>
+    </div>
+  </div>
+</section>
 
-    <section class="events" id="projects">
-      <p class="events-tag">[CLIENT PROJECTS]</p>
-      <h2>Recent Projects</h2>
-      <div class="event-cards">
-        <a href="https://bestnanotechindia.com" target="_blank" style="text-decoration:none; color:inherit;">
-          <div class="event-card">
-            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80" alt="E-commerce Project">
-            <div class="event-info">
-              <p>Website</p>
-              <h4>E-COMMERECE</h4>
-              <p class="project-desc">Node.js & MongoDB</p>
-            </div>
-          </div>
-        </a>
-        <div class="event-card">
-          <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80" alt="Student Project">
-          <div class="event-info">
-            <p>Website</p>
-            <h4>STUDENT PORTFOLIO</h4>
-            <p class="project-desc">Html, CSS, Javascript</p>
-          </div>
-        </div>
-        <a href="https://www.solvecrew.site" target="_blank" style="text-decoration:none; color:inherit;">
-          <div class="event-card">
-            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=80" alt="Business Solutions">
-            <div class="event-info">
-              <p>Website</p>
-              <h4>BUSINESS PORTFOLIO</h4>
-              <p class="project-desc">Html, CSS, Javascript</p>
-            </div>
-          </div>
-        </a>
+<section class="events" id="projects">
+  <p class="events-tag">[CLIENT PROJECTS]</p>
+  <h2>Recent Projects</h2>
+  <div class="event-cards">
+    <a href="https://bestnanotechindia.com" target="_blank" style="text-decoration:none; color:inherit;">
+    <div class="event-card">
+      <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80" alt="E-commerce Project">
+      <div class="event-info">
+        <p>Website</p>
+        <h4>E-COMMERECE</h4>
+        <p class="project-desc">Node.js & MongoDB</p>
       </div>
-    </section>
+    </div>
+  </a>
+  <div class="event-card">
+    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80" alt="Student Project">
+    <div class="event-info">
+      <p>Website</p>
+      <h4>STUDENT PORTFOLIO</h4>
+      <p class="project-desc">Html, CSS, Javascript</p>
+    </div>
+  </div>
+  <a href="https://www.solvecrew.site" target="_blank" style="text-decoration:none; color:inherit;">
+    <div class="event-card">
+      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=80" alt="Business Solutions">
+      <div class="event-info">
+        <p>Website</p>
+        <h4>BUSINESS PORTFOLIO</h4>
+        <p class="project-desc">Html, CSS, Javascript</p>
+      </div>
+    </div>
+  </a>
+</div>
+</section>
+<section class="contact" id="contact">
+  <h2>Let's Connect</h2>
+  <form action="https://getform.io/f/apjpndda" method="POST" id="contact-form">
+    <input type="email" name="email" placeholder="Your Email" required />
+    <input type="text" name="subject" placeholder="Subject" required />
+    <textarea name="message" placeholder="Your Message and give your email at last" required></textarea>
+    <button type="submit">Send</button>
+  </form>
+  <div id="form-status"></div>
+</section>
 
-    <section class="contact" id="contact">
-      <div class="contact-left">
-        <h2>Let's Connect</h2>
-      </div>
-      <div class="contact-right">
-        <form action="https://getform.io/f/apjpndda" method="POST" id="contact-form">
-          <input type="email" name="email" placeholder="Your Email" required />
-          <br />
-          <input type="text" name="subject" placeholder="Subject" required />
-          <br />
-          <textarea name="message" placeholder="Your Message and give your email at last" required></textarea>
-          <br />
-          <button type="submit">Send</button>
-        </form>
-      </div>
-    </section>
-  </main>
+<footer class="footer">
+  <p>© 2025 Solvecrew. All rights reserved.</p>
+</footer>
+    <script>
+      // Smooth scroll for nav links
+      document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', function(e) {
+          const href = link.getAttribute('href');
+          if (href.startsWith('#')) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+              const rect = target.getBoundingClientRect();
+              const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+              // Scroll so the section is centered in the viewport
+              const offset = rect.top + scrollTop - (window.innerHeight / 2) + (rect.height / 2);
+              window.scrollTo({
+                top: offset,
+                behavior: 'smooth'
+              });
+            }
+          }
+        });
+      });
 
-  <footer class="footer">
-    <p>© 2025 Solvecrew. All rights reserved.</p>
-  </footer>
-</body>
+      // AJAX form submission for contact form
+      const form = document.getElementById('contact-form');
+      const statusDiv = document.getElementById('form-status');
+      if (form) {
+        form.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          const formData = new FormData(form);
+          const data = Object.fromEntries(formData.entries());
+          const res = await fetch('/api/send_email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          const result = await res.json();
+          statusDiv.textContent = result.success ? 'Message sent!' : 'Failed to send message.';
+          if (result.success) form.reset();
+        });
+      }
+    </script>
+    <script>
+  // Mobile menu toggle
+  const menuBtn = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('nav');
+  if (menuBtn) {
+    menuBtn.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      menuBtn.classList.toggle('active'); // <-- Add this line
+    });
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        menuBtn.classList.remove('active'); // <-- Add this line
+      });
+    });
+  }
+</script>
+<script>
+const menuToggle = document.querySelector('.menu-toggle');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  if (!menuToggle) return;
+  if (window.scrollY > 60) {
+    menuToggle.classList.add('hide-on-scroll');
+  } else {
+    menuToggle.classList.remove('hide-on-scroll');
+  }
+});
+</script>
+
+  </body>
 </html>

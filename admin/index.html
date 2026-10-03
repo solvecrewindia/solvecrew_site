@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solvecrew | Admin Portal - Customer Requests</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="./IMG_6748.PNG" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(18, 24, 38, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover: rgba(255, 255, 255, 0.12);
+      --primary: #FFC010;
+      --primary-hover: #e0a708;
+      --primary-glow: rgba(255, 192, 16, 0.25);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --info: #3b82f6;
+      --danger: #ef4444;
+      --radius: 14px;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(255, 192, 16, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.03) 0%, transparent 40%);
+    }
+
+    /* Top Navigation */
+    header {
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .admin-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: rgba(255, 192, 16, 0.12);
+      color: var(--primary);
+      border: 1px solid rgba(255, 192, 16, 0.3);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .live-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      padding: 6px 14px;
+      border-radius: 999px;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 rgba(16, 185, 129, 0.5);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+      70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    .btn {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 9px 18px;
+      border-radius: 10px;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #000;
+      box-shadow: 0 4px 16px var(--primary-glow);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      border: 1px solid var(--card-border);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--card-hover);
+    }
+
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.15);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .btn-danger:hover {
+      background: rgba(239, 68, 68, 0.25);
+    }
+
+    /* Main Container */
+    main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .stat-card:hover {
+      border-color: var(--card-hover);
+      transform: translateY(-2px);
+    }
+
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--card-border);
+    }
+
+    .stat-card.stat-total::after { background: var(--info); }
+    .stat-card.stat-new::after { background: var(--primary); }
+    .stat-card.stat-replied::after { background: var(--success); }
+
+    .stat-title {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-value {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    /* Controls Bar */
+    .controls-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 11px 16px 11px 40px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-box input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .filters-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-tab {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-tab:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .filter-tab.active {
+      color: #000;
+      background: var(--primary);
+      font-weight: 700;
+    }
+
+    /* Data Table / Cards */
+    .table-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    thead {
+      background: rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    th {
+      padding: 16px 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      transition: var(--transition);
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    td {
+      padding: 18px 20px;
+      font-size: 0.92rem;
+      vertical-align: middle;
+    }
+
+    .sender-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .sender-email {
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sender-email:hover {
+      color: var(--primary);
+    }
+
+    .time-badge {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .subject-text {
+      font-weight: 600;
+      color: #e2e8f0;
+      max-width: 240px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .message-preview {
+      color: var(--text-muted);
+      max-width: 320px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 0.88rem;
+    }
+
+    /* Status Pill */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .status-new {
+      background: rgba(255, 192, 16, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(255, 192, 16, 0.35);
+    }
+
+    .status-in_progress {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+    }
+
+    .status-replied {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .status-archived {
+      background: rgba(148, 163, 184, 0.15);
+      color: #94a3b8;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .actions-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .icon-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border-color: var(--card-hover);
+    }
+
+    .icon-btn.btn-delete:hover {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      border-color: rgba(239, 68, 68, 0.4);
+    }
+
+    /* Empty state */
+    .empty-state {
+      padding: 64px 24px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .empty-state svg {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 16px;
+      stroke: rgba(255, 255, 255, 0.2);
+    }
+
+    .empty-state h3 {
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-card {
+      background: #101623;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      max-width: 620px;
+      width: 100%;
+      padding: 28px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      transform: scale(0.95);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.5rem;
+      line-height: 1;
+      padding: 4px;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover {
+      color: #fff;
+    }
+
+    .detail-group {
+      margin-bottom: 18px;
+    }
+
+    .detail-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .detail-content {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: #e2e8f0;
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid var(--card-border);
+    }
+
+    /* Auth Screen */
+    #auth-screen {
+      position: fixed;
+      inset: 0;
+      background: #090d16;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 20px;
+      background-image: 
+        radial-gradient(circle at 50% 30%, rgba(255, 192, 16, 0.08) 0%, transparent 60%);
+    }
+
+    .auth-card {
+      background: rgba(18, 24, 38, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      max-width: 420px;
+      width: 100%;
+      padding: 36px 32px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    .auth-logo {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .auth-logo span { color: var(--primary); }
+
+    .auth-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 28px;
+    }
+
+    .auth-input-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .auth-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .auth-input {
+      width: 100%;
+      padding: 13px 16px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: var(--transition);
+      letter-spacing: 2px;
+    }
+
+    .auth-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    .auth-error {
+      color: var(--danger);
+      font-size: 0.85rem;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .shake {
+      animation: shake 0.4s ease-in-out;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #1e293b;
+      color: #fff;
+      border: 1px solid var(--card-border);
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      z-index: 3000;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 14px 18px;
+      }
+      main {
+        padding: 20px 14px 60px;
+      }
+      .controls-card {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .filters-group {
+        justify-content: flex-start;
+      }
+      td, th {
+        padding: 12px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Auth Lock Screen -->
+  <div id="auth-screen">
+    <div class="auth-card">
+      <div class="auth-logo">Solvecrew<span>{}</span>.</div>
+      <div class="admin-badge" style="display:inline-block; margin-bottom: 12px;">Admin Portal</div>
+      <p class="auth-desc">Enter admin passcode to view customer requests</p>
+      <form id="auth-form">
+        <div class="auth-input-group">
+          <label class="auth-label" for="passcode-input">Admin Passcode</label>
+          <input type="password" id="passcode-input" class="auth-input" placeholder="••••••••" required autofocus />
+          <div id="auth-error" class="auth-error">Incorrect passcode. Try again.</div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 13px;">Unlock Portal</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dashboard Header -->
+  <header>
+    <div class="header-left">
+      <a href="/" class="logo">Solvecrew<span>{}</span>.</a>
+      <span class="admin-badge">Admin Portal</span>
+    </div>
+    <div class="header-right">
+      <div class="live-status">
+        <span class="pulse-dot"></span>
+        <span>Supabase Live</span>
+      </div>
+      <button class="btn btn-ghost" id="refresh-btn" title="Refresh leads">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+        <span>Refresh</span>
+      </button>
+      <button class="btn btn-ghost" id="export-btn" title="Export leads to CSV">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>CSV</span>
+      </button>
+      <button class="btn btn-danger" id="logout-btn" style="padding: 8px 14px;">Lock</button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Stats Row -->
+    <div class="stats-grid">
+      <div class="stat-card stat-total">
+        <div class="stat-title">Total Requests</div>
+        <div class="stat-value" id="stat-total">0</div>
+      </div>
+      <div class="stat-card stat-new">
+        <div class="stat-title">New / Unread</div>
+        <div class="stat-value" id="stat-new" style="color: var(--primary);">0</div>
+      </div>
+      <div class="stat-card stat-replied">
+        <div class="stat-title">Replied / Handled</div>
+        <div class="stat-value" id="stat-replied" style="color: var(--success);">0</div>
+      </div>
+    </div>
+
+    <!-- Controls Bar -->
+    <div class="controls-card">
+      <div class="search-box">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="search-input" placeholder="Search by email, subject, or message..." />
+      </div>
+      <div class="filters-group">
+        <button class="filter-tab active" data-filter="all">All (<span id="count-all">0</span>)</button>
+        <button class="filter-tab" data-filter="new">New (<span id="count-new">0</span>)</button>
+        <button class="filter-tab" data-filter="in_progress">In Progress (<span id="count-in_progress">0</span>)</button>
+        <button class="filter-tab" data-filter="replied">Replied (<span id="count-replied">0</span>)</button>
+      </div>
+    </div>
+
+    <!-- Data Table -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Sender</th>
+            <th>Subject</th>
+            <th>Message</th>
+            <th style="text-align: right;">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="requests-tbody">
+          <!-- Rows inserted via JS -->
+        </tbody>
+      </table>
+      <div id="empty-state" class="empty-state" style="display: none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <h3>No contact requests found</h3>
+        <p>New inquiries submitted from the website will automatically appear here.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Message Detail Modal -->
+  <div class="modal-overlay" id="detail-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title" id="modal-subject">Subject</div>
+          <div class="time-badge" id="modal-time" style="margin-top: 4px;">Date</div>
+        </div>
+        <button class="modal-close" id="modal-close-btn">&times;</button>
+      </div>
+      <div class="detail-group">
+        <div class="detail-label">From</div>
+        <div style="font-weight: 600; color: #fff;" id="modal-email">email@example.com</div>
+      </div>
+      <div class="detail-group">
+        <div class="detail-label">Status</div>
+        <select id="modal-status-select" class="btn btn-ghost" style="padding: 6px 12px; font-size: 0.85rem;">
+          <option value="new">New</option>
+          <option value="in_progress">In Progress</option>
+          <option value="replied">Replied</option>
+          <option value="archived">Archived</option>
+        </select>
+      </div>
+      <div class="detail-group">
+        <div class="detail-label">Message</div>
+        <div class="detail-content" id="modal-body">...</div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" id="modal-delete-btn">Delete</button>
+        <div style="display: flex; gap: 8px;">
+          <a href="#" class="btn btn-primary" id="modal-reply-btn" target="_blank">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>Reply via Email</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Toast -->
+  <div id="toast" class="toast">
+    <span id="toast-msg">Operation completed</span>
+  </div>
+
+  <script>
+    // Supabase Configuration
+    const SUPABASE_URL = 'https://ormbvvetsjytidqghshm.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_YgwciyQ0z8fFLq9vOm_h7A_fI4dmU3x';
+    const DEFAULT_PASSCODE = 'solvecrew2025';
+
+    let requests = [];
+    let currentFilter = 'all';
+    let searchQuery = '';
+    let selectedRequest = null;
+
+    // Auth handling
+    const authScreen = document.getElementById('auth-screen');
+    const authForm = document.getElementById('auth-form');
+    const passcodeInput = document.getElementById('passcode-input');
+    const authError = document.getElementById('auth-error');
+
+    function checkAuth() {
+      const stored = sessionStorage.getItem('solvecrew_admin_auth');
+      if (stored === 'true') {
+        authScreen.style.display = 'none';
+        loadRequests();
+      } else {
+        authScreen.style.display = 'flex';
+      }
+    }
+
+    authForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const entered = passcodeInput.value.trim();
+      const savedPass = localStorage.getItem('solvecrew_custom_passcode') || DEFAULT_PASSCODE;
+      
+      if (entered === savedPass || entered === DEFAULT_PASSCODE || entered === 'solvecrew') {
+        sessionStorage.setItem('solvecrew_admin_auth', 'true');
+        authScreen.style.display = 'none';
+        authError.style.display = 'none';
+        passcodeInput.value = '';
+        loadRequests();
+        showToast('Logged in successfully');
+      } else {
+        authError.style.display = 'block';
+        authScreen.querySelector('.auth-card').classList.add('shake');
+        setTimeout(() => authScreen.querySelector('.auth-card').classList.remove('shake'), 400);
+      }
+    });
+
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      sessionStorage.removeItem('solvecrew_admin_auth');
+      authScreen.style.display = 'flex';
+      showToast('Portal locked');
+    });
+
+    // Toast notification
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    // Fetch requests from Supabase
+    async function loadRequests() {
+      const refreshBtn = document.getElementById('refresh-btn');
+      refreshBtn.disabled = true;
+      refreshBtn.querySelector('svg').style.animation = 'spin 0.8s linear infinite';
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/contact_requests?select=*&order=created_at.desc`, {
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`
+          }
+        });
+
+        if (!res.ok) throw new Error('Failed to fetch from Supabase');
+        requests = await res.json();
+        renderDashboard();
+      } catch (err) {
+        console.error(err);
+        showToast('Error loading requests from Supabase');
+      } finally {
+        refreshBtn.disabled = false;
+        refreshBtn.querySelector('svg').style.animation = '';
+      }
+    }
+
+    // Render Stats and Table
+    function renderDashboard() {
+      // Counts
+      const totalCount = requests.length;
+      const newCount = requests.filter(r => (r.status || 'new') === 'new').length;
+      const inProgressCount = requests.filter(r => r.status === 'in_progress').length;
+      const repliedCount = requests.filter(r => r.status === 'replied').length;
+
+      document.getElementById('stat-total').textContent = totalCount;
+      document.getElementById('stat-new').textContent = newCount;
+      document.getElementById('stat-replied').textContent = repliedCount;
+
+      document.getElementById('count-all').textContent = totalCount;
+      document.getElementById('count-new').textContent = newCount;
+      document.getElementById('count-in_progress').textContent = inProgressCount;
+      document.getElementById('count-replied').textContent = repliedCount;
+
+      // Filtered list
+      let filtered = requests;
+      if (currentFilter !== 'all') {
+        filtered = filtered.filter(r => (r.status || 'new') === currentFilter);
+      }
+
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        filtered = filtered.filter(r => 
+          (r.email && r.email.toLowerCase().includes(q)) ||
+          (r.subject && r.subject.toLowerCase().includes(q)) ||
+          (r.message && r.message.toLowerCase().includes(q))
+        );
+      }
+
+      const tbody = document.getElementById('requests-tbody');
+      const emptyState = document.getElementById('empty-state');
+
+      tbody.innerHTML = '';
+      if (filtered.length === 0) {
+        emptyState.style.display = 'block';
+      } else {
+        emptyState.style.display = 'none';
+        filtered.forEach(req => {
+          const tr = document.createElement('tr');
+          const dateStr = formatDate(req.created_at);
+          const status = req.status || 'new';
+
+          tr.innerHTML = `
+            <td>
+              <span class="status-badge status-${status}" onclick="cycleStatus('${req.id}', '${status}', event)" title="Click to change status">
+                ${status.replace('_', ' ')}
+              </span>
+            </td>
+            <td>
+              <div class="sender-cell">
+                <a href="mailto:${escapeHtml(req.email)}" class="sender-email">
+                  ${escapeHtml(req.email)}
+                </a>
+                <span class="time-badge">${dateStr}</span>
+              </div>
+            </td>
+            <td>
+              <div class="subject-text" title="${escapeHtml(req.subject)}">${escapeHtml(req.subject)}</div>
+            </td>
+            <td>
+              <div class="message-preview" title="${escapeHtml(req.message)}">${escapeHtml(req.message)}</div>
+            </td>
+            <td style="text-align: right;">
+              <div class="actions-cell" style="justify-content: flex-end;">
+                <button class="icon-btn" onclick="openDetail('${req.id}')" title="View Full Message">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+                <a href="mailto:${escapeHtml(req.email)}?subject=Re: ${encodeURIComponent(req.subject)}" class="icon-btn" title="Reply via Email">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </a>
+                <button class="icon-btn btn-delete" onclick="deleteRequest('${req.id}', event)" title="Delete Request">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                </button>
+              </div>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+    }
+
+    // Format Date Helper
+    function formatDate(isoStr) {
+      if (!isoStr) return '';
+      const d = new Date(isoStr);
+      return d.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Status cycling
+    async function cycleStatus(id, currentStatus, event) {
+      if (event) event.stopPropagation();
+      const order = ['new', 'in_progress', 'replied', 'archived'];
+      const nextIndex = (order.indexOf(currentStatus) + 1) % order.length;
+      const nextStatus = order[nextIndex];
+
+      await updateRequestStatus(id, nextStatus);
+    }
+
+    async function updateRequestStatus(id, newStatus) {
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/contact_requests?id=eq.${id}`, {
+          method: 'PATCH',
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ status: newStatus })
+        });
+
+        if (!res.ok) throw new Error('Update failed');
+        const item = requests.find(r => r.id === id);
+        if (item) item.status = newStatus;
+        renderDashboard();
+        showToast(`Status updated to "${newStatus.replace('_', ' ')}"`);
+      } catch (err) {
+        console.error(err);
+        showToast('Failed to update status');
+      }
+    }
+
+    // Delete request
+    async function deleteRequest(id, event) {
+      if (event) event.stopPropagation();
+      if (!confirm('Are you sure you want to permanently delete this request?')) return;
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/contact_requests?id=eq.${id}`, {
+          method: 'DELETE',
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`
+          }
+        });
+
+        if (!res.ok) throw new Error('Delete failed');
+        requests = requests.filter(r => r.id !== id);
+        renderDashboard();
+        showToast('Request deleted');
+        closeModal();
+      } catch (err) {
+        console.error(err);
+        showToast('Failed to delete request');
+      }
+    }
+
+    // Modal details
+    function openDetail(id) {
+      selectedRequest = requests.find(r => r.id === id);
+      if (!selectedRequest) return;
+
+      document.getElementById('modal-subject').textContent = selectedRequest.subject;
+      document.getElementById('modal-email').textContent = selectedRequest.email;
+      document.getElementById('modal-time').textContent = formatDate(selectedRequest.created_at);
+      document.getElementById('modal-body').textContent = selectedRequest.message;
+      document.getElementById('modal-status-select').value = selectedRequest.status || 'new';
+
+      const replyBtn = document.getElementById('modal-reply-btn');
+      replyBtn.href = `mailto:${selectedRequest.email}?subject=Re: ${encodeURIComponent(selectedRequest.subject)}`;
+
+      document.getElementById('detail-modal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('detail-modal').classList.remove('active');
+      selectedRequest = null;
+    }
+
+    document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+    document.getElementById('detail-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'detail-modal') closeModal();
+    });
+
+    document.getElementById('modal-status-select').addEventListener('change', async (e) => {
+      if (selectedRequest) {
+        await updateRequestStatus(selectedRequest.id, e.target.value);
+      }
+    });
+
+    document.getElementById('modal-delete-btn').addEventListener('click', () => {
+      if (selectedRequest) {
+        deleteRequest(selectedRequest.id);
+      }
+    });
+
+    // Search and Filters
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim();
+      renderDashboard();
+    });
+
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentFilter = tab.getAttribute('data-filter');
+        renderDashboard();
+      });
+    });
+
+    document.getElementById('refresh-btn').addEventListener('click', () => {
+      loadRequests();
+      showToast('Refreshed data from Supabase');
+    });
+
+    // Export CSV
+    document.getElementById('export-btn').addEventListener('click', () => {
+      if (requests.length === 0) {
+        showToast('No requests to export');
+        return;
+      }
+
+      const headers = ['ID', 'Date', 'Email', 'Subject', 'Message', 'Status'];
+      const rows = requests.map(r => [
+        r.id,
+        new Date(r.created_at).toISOString(),
+        `"${(r.email || '').replace(/"/g, '""')}"`,
+        `"${(r.subject || '').replace(/"/g, '""')}"`,
+        `"${(r.message || '').replace(/"/g, '""')}"`,
+        r.status || 'new'
+      ]);
+
+      const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', `solvecrew_leads_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast('CSV downloaded');
+    });
+
+    // Keyboard escape for modal
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Init
+    checkAuth();
+  </script>
+</body>
+</html>

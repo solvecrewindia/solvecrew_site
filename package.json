@@ -1,0 +1,27 @@
+{
+  "name": "solvecrew",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "python -m http.server 3000",
+    "start": "python -m http.server 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solvecrewindia/solvecrew_site.git"
+  },
+  "description": "Solvecrew - Creative Web Development Company building smart, user-focused digital solutions.",
+  "keywords": [
+    "solvecrew",
+    "web-development",
+    "creative-agency",
+    "portfolio",
+    "ecommerce"
+  ],
+  "author": "Solvecrew",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.61.0",
+    "@types/node": "^25.9.3"
+  }
+}

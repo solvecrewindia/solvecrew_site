@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.solvecrew.site/sitemap.xml
+Sitemap: https://solvecrewindia.vercel.app/sitemap.xml

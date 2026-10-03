@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="120" fill="#000000"/>
+  <g font-family="'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="230" text-anchor="middle" dominant-baseline="central">
+    <text x="185" y="260" fill="#FFFFFF">S</text>
+    <text x="345" y="255" fill="#FFC010">{}</text>
+  </g>
+</svg>
